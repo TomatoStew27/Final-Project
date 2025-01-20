@@ -7,6 +7,9 @@ package javaapplication6;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  *
@@ -14,21 +17,8 @@ import java.util.Scanner;
  */
 public class coreGame{
     
-    public static void main(String[] args) {
-        String[] elixirOfyouth = {"silver dust", "fire amber", "unicorn blood"};
-        String[] elixirOfhealing = {"mageberries", "weavemoss", "toadstool"};
-        String[] elixirOfmirth = {"ogres blood", "silver dust", "fairy essence"};
-        String[] elixirOfslumber = {"mageberries", "fire amber", "fairy essence"};
-        String[] elixirOfcharm = {"vampire soul", "silver dust", "weavemoss"};
-        String[] elixirOflove = {"unicorn blood", "mageberries", "hag's mushroom"};
-        String[] elixirOfspeed = {"fairy essence", "toadstool", "mageberries"};
-        String[] elixirOfluck = {"silver dust", "mageberries", "hag's mushrooms"};
-        
-        String[] elixirOfmalice = {"vampire soul", "mageberries", "ogres blood"};
-        String[] elixirOfdecay = {"silver dust", "toadstool", "hag's mushroom"};
-        String[] elixirOfpoison = {"weavemoss", "ogres blood", "fire amber"};
-        String[] elixirOfsorrows = {"unicorn blood", "fire amber", "toadstool"};
-        
+    public static void scenario() {
+ 
         String scenarioYouth = "(I need an elixir to retain my youthful vigor. Can you craft something for me, alchemist?)";
         String scenarioHealing = "(I have been grievously wounded in battle. Can you prepare a healing potion for me, master alchemist?)";
         String scenarioMirth = "(My heart is heavy and my soul burdened. I seek a potion to lift my spirits!)";
@@ -42,11 +32,11 @@ public class coreGame{
         String scenarioPoison = "(Rats infest my home, and my patience is gone. Can you craft something deadly to rid me of them?)";
         String scenarioSorrows = "(A friend of mine has found joy, but I cannot bear it. I wish for them to know sorrow.)";
         Random scenario = new Random();
-        int chosen = scenario.nextInt(0, 11);
+        int chosen = scenario.nextInt(12);
         String option = "";
         
         if(chosen == 0) {
-            String option = scenarioYouth;}
+            option = scenarioYouth;}
         else if (chosen == 1) {
             option = scenarioHealing;}
         else if (chosen == 2) {
@@ -68,17 +58,25 @@ public class coreGame{
         else if (chosen == 10) {
             option = scenarioPoison;}
         else if (chosen == 11) {
-            option = scenarioSorrows;}           
+            option = scenarioSorrows;}
         
+        System.out.println(option);
         
+}
+        
+    public static void patronPick() {
+        Random characters = new Random();
         String characterOne =  ("Lord Silverhearth");
-        String characterTwo = ("Sir Arthur Pennycopper");
+        String characterTwo = ("Sir Ashen Pennycopper");
         String characterThree = ("Garalon");
         String characterFour = ("Auntie Agnes");
         String characterFive = ("Mrs. Fayne");
         String characterSix = ("Veldric the wise");
+        String characterSeven = ("Broilbog the ogre");
+        String characterEight = ("Princess Evangaline");
+        String characterNine = ("Quarion moonbrooke");
         
-        int character = scenario.nextInt(0, 5);
+        int character = characters.nextInt(0, 8);
         String name = "";
         if (character == 0) {
             name = characterOne;}
@@ -92,64 +90,132 @@ public class coreGame{
             name = characterFive;}
         else if (character == 5) {
             name = characterSix;}
-              
+        else if (character == 6) {
+            name = characterSeven;}
+        else if (character == 7) {
+            name = characterEight;}
+        else if (character == 8) {
+            name = characterNine;}
         
+        System.out.println("Greeting's it is I, " + name + " and I require your skills alchemist.");
+    }    
+       
+    public static void mapPick() {
+        HashMap<String, String> alchemyBook = new HashMap<String, String>();
+
+        alchemyBook.put("silver dust, fire amber, unicorn blood", "Elixir of youth");
+        alchemyBook.put("mageberries, weavemoss, toadstool", "Elixir of healing");
+        alchemyBook.put("ogres blood, silver dust, fairy essence", "Elixir of mirth");
+        alchemyBook.put("mageberries, fire amber, fairy essence", "Elixir of slumber");
+        alchemyBook.put("vampire soul, silver dust, weavemoss", "Elixir of charm");
+        alchemyBook.put("unicorn blood, mageberries, hag's mushroom", "Elixir of love");
+        alchemyBook.put("fairy essence, toadstool, mageberries", "Elixir of speed");
+        alchemyBook.put("silver dust, mageberries, hag's mushrooms", "Elixir of luck");
+        alchemyBook.put("vampire soul, mageberries, ogres blood", "Elixir of malice");
+        alchemyBook.put("silver dust, toadstool, hag's mushroom", "Elixir of decay");
+        alchemyBook.put("weavemoss, ogres blood, fire amber", "Elixir of poison");
+        alchemyBook.put("unicorn blood, fire amber, toadstool", "Elixir of sorrows");
         
+        System.out.println("\nAlchemy Book Contents:\n");
+        for (Map.Entry<String, String> entry : alchemyBook.entrySet()) {
+    System.out.println("Ingredients: " + entry.getKey());
+    System.out.println("Elixir: " + entry.getValue());
+    System.out.println("---------------------------");}}
+
+    public static void main(String[] args) {
+        
+        String yes = "yes";
+        String no = "no";
         
         Scanner potions = new Scanner(System.in);
-        System.out.println("Greeting's it is I, " + name + " and I require your skills alchemist.");
+            System.out.println("");
+            System.out.println("");
         System.out.println("");
+        patronPick();
         System.out.println("I seek a draft for this issue:");
-        System.out.println(option);
+        scenario();
         System.out.println("");
-        System.out.print("Please select your first ingredient: ");
+        System.out.println("Before you choose the ingredients to brew, would you like to search the spellbook?: ");
+        String book = potions.nextLine().toLowerCase();
+        if (book.equals(yes)) {
+            // Done by CHATGPT
+            mapPick();}
+            
+        System.out.print("");
+        System.out.print("Choose first ingredient to brew: ");
         String first = potions.nextLine().toLowerCase();
-        System.out.print("Please select your second ingredient: ");
+        System.out.print("Choose second ingredient to brew: ");
         String second = potions.nextLine().toLowerCase();
-        System.out.print("Please select your final ingredient: ");
+        System.out.print("Choose third ingredient to brew: ");
         String third = potions.nextLine().toLowerCase();
+        System.out.println("Cauldron is brewing...");
+        System.out.println("");
         String [] potionCombo = {first, second, third};
+        patronResponse(potionCombo);
+    
+    
+    }
+    
+    public static void patronResponse (String[]potionCombo) {
+          String[] elixirOfyouth = {"silver dust", "fire amber", "unicorn blood"};
+        String[] elixirOfhealing = {"mageberries", "weavemoss", "toadstool"};
+        String[] elixirOfmirth = {"ogres blood", "silver dust", "fairy essence"};
+        String[] elixirOfslumber = {"mageberries", "fire amber", "fairy essence"};
+        String[] elixirOfcharm = {"vampire soul", "silver dust", "weavemoss"};
+        String[] elixirOflove = {"unicorn blood", "mageberries", "hag's mushroom"};
+        String[] elixirOfspeed = {"fairy essence", "toadstool", "mageberries"};
+        String[] elixirOfluck = {"silver dust", "mageberries", "hag's mushrooms"};
+        
+        String[] elixirOfmalice = {"vampire soul", "mageberries", "ogres blood"};
+        String[] elixirOfdecay = {"silver dust", "toadstool", "hag's mushroom"};
+        String[] elixirOfpoison = {"weavemoss", "ogres blood", "fire amber"};
+        String[] elixirOfsorrows = {"unicorn blood", "fire amber", "toadstool"};
         
         if (Arrays.equals(potionCombo, elixirOfyouth)) {
             System.out.print("Your patron can again feel youthful – and young. You've made an elixir of youth, well done!");}
         else if (Arrays.equals(potionCombo, elixirOfhealing)) {
-            System.out.print("Your patron can finally feel refreshed, rejuvinated. You've made an elixir of healing, great job!");}
+            System.out.print("Thank you alchemist. Without your aid I would have surely perish.");}
         else if (Arrays.equals(potionCombo, elixirOfmirth)) {
-            System.out.print("Your patron can't stop laughing? hehehe! Great job, you've made an elixir of mirth!");
+            System.out.print("Huzzah! I feel like a child oncemore, thanks to you dear alchemist.");
         }
         else if (Arrays.equals(potionCombo, elixirOfslumber)) {
-            System.out.print("Your patron can at last sleep well. ZZZZZZZ! Say goodbye to insomnia – because you've made an elixir of slumber. ");
+            System.out.print("I can at last rest! Oh dear god! Thank you alchemist.");
         }
         else if (Arrays.equals(potionCombo, elixirOfcharm)) {
-            System.out.print("Your patron will soon feel diffrent. Charismatic, confident, and attractive. Farewell to lonely nights! You've made an elixir of charm!");
+            System.out.print("I feel charismatic, confident. Your are a saint my fellow!");
         }
         else if (Arrays.equals(potionCombo, elixirOflove)) {
-            System.out.print("Your patron can finally find love, thanks to you. You've made an elxir of love!");
+            System.out.print("I can finally find love, thanks to you alchemist!");
         }
         else if (Arrays.equals(potionCombo, elixirOfmalice)) {
-            System.out.print(" Your patron feels bitter, spiteful, and envious. Wait – you've created an elixir of malice!");
+            System.out.print("Soon I shall be rid of my foes. HAHAHAHA!");
 
 
 }
         else if (Arrays.equals(potionCombo, elixirOfdecay)) {
-            System.out.print("HAHAHA! Soon your patrons enemies will feel – zombie like. Wait! You've made an elixir of decay!");
+            System.out.print("HAHAHA! Soon my neighbour shall feel – zombie like. Oh rejoice!");
         }
         else if (Arrays.equals(potionCombo, elixirOfpoison)) {
-            System.out.print("Your patron! They're enemies will soon be dead! It looks like you've made an elixir of poison...");
+            System.out.print("At last I may finally be rid of those foul pests! Thanks to you alchemist.");
             
 }
         else if (Arrays.equals(potionCombo, elixirOfspeed)){
-            System.out.print("Your patron will soon feel fast. Like a hare or cheetah. You've managed to make an elixir of speed! ZOOM!");
+            System.out.print("I feel agile. I feel fast. Like a hare!");
         }
         else if (Arrays.equals(potionCombo, elixirOfluck)) {
-            System.out.print("Your patrons willl feel strange, lucky almost. You've made an elixir of luck!");
+            System.out.print("I feel strange, lucky almost.");
         }
         else if (Arrays.equals(potionCombo, elixirOfsorrows)) {
-            System.out.print("Your patron feels melancholy, forlorn, sad. They can't help but shed a few tears. You've made an elixir of sorrows – wow you are mean!");
+            System.out.print("Thanks to you alchemist. My dear friend will pay!");
         }
         else {
-            System.out.print("You've managed to make a potion that is very much useless! Well done! ");
+            System.out.print("Whats this! I didn't ask for that! Do you take me as a fool? Good day!");
         }
         
-}
+
+    }
+    
+    
+    
+    
 }
